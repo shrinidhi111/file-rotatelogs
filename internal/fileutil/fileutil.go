@@ -45,11 +45,11 @@ func CreateFile(filename string) (*os.File, error) {
 	// make sure the dir is existed, eg:
 	// ./foo/bar/baz/hello.log must make sure ./foo/bar/baz is existed
 	dirname := filepath.Dir(filename)
-	if err := os.MkdirAll(dirname, 0755); err != nil {
+	if err := os.MkdirAll(dirname, 0777); err != nil {
 		return nil, errors.Wrapf(err, "failed to create directory %s", dirname)
 	}
 	// if we got here, then we need to create a file
-	fh, err := os.OpenFile(filename, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
+	fh, err := os.OpenFile(filename, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0777)
 	if err != nil {
 		return nil, errors.Errorf("failed to open file %s: %s", filename, err)
 	}

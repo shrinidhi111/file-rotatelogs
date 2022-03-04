@@ -295,7 +295,7 @@ func (rl *RotateLogs) rotateNolock(filename string) error {
 		// the directory where rl.linkName should be created must exist
 		_, err := os.Stat(linkDir)
 		if err != nil { // Assume err != nil means the directory doesn't exist
-			if err := os.MkdirAll(linkDir, 0755); err != nil {
+			if err := os.MkdirAll(linkDir, 0777); err != nil {
 				return errors.Wrapf(err, `failed to create directory %s`, linkDir)
 			}
 		}
